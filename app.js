@@ -54,18 +54,7 @@ function mainMenu(person, people){
 }
 
 
-function searchByTraits(people){
-  var userInputeNumberOfTraits = promptFor("How many traits would you like to compare?", chars)
 
-  switch(userInputeNumberOfTraits){
-    case "1":
-    case "one":
-      let intOfTraits = 1;
-      pickTheTraits(intOfTraits);
-    break;
-
-  }
-}
 
 //Needed ability to search by name & last name
 
@@ -80,100 +69,32 @@ function searchByName(people){
   });  
 }
 
-//Needed ability to search by gender
-function searchByGender(people){
+//Needed ability to loop searches to narrow down people
+function startSearchLoop(people){
+  
+
+  }
+}
+
+//Needed ability to search by trait
+function searchByTrait(people,trait){
   var gender = promptFor("what is the person's gender?", chars);
 
   let filteredPeople = people.filter(function(el) {
-    if(el.gender === gender) {
+    if(el.trait === trait) {
       return el;
     }
   });  
 }
 
-//Needed ability to search by DOB
-function searchByDOB(people){
-  var dob = promptFor("What is the person's date of birth?", chars);
+function continueSearchLoop(){
 
-  let filteredPeople = people.filter(function(el) {
-    if(el.dob === dob) {
-      return el;
-    }
-  });  
 }
-
-//Needed ability to search by height
-function searchByHeight(people){
-  var height = promptFor("What is the person's height?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el.height === height) {
-      return el;
-    }
-  });  
-}
-
-//Needed ability to search by weight
-function searchByWeight(people){
-  var weight = promptFor("What is the person's weight?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el.weight === weight) {
-      return el;
-    }
-  });  
-}
-
-//Needed ability to search by eye color
-function searchByEyeColor(people){
-  var eyeColor = promptFor("What is the person's eye color?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el.eyeColor === eyeColor) {
-      return el;
-    }
-  });  
-}
-
-//Needed ability to search by occupation
-function searchByOccupation(people){
-  var occupation = promptFor("What is the person's occupation?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el.occupation === occupation) {
-      return el;
-    }
-  });  
-}
-
-//Needed ability to search by parents
-function searchByParents(people){
-  var parents = promptFor("Who are the person's parents?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el[parents] === parents) {
-      return el;
-    }
-  });  
-}
-
-//Needed ability to search by current spouse
-function searchByCurrentSpouse(people){
-  var currentSpouse = promptFor("Who is the person's current spouse?", chars);
-
-  let filteredPeople = people.filter(function(el) {
-    if(el.currentSpouse === currentSpouse) {
-      return el;
-    }
-  });  
-}
-
-  // TODO: What to do with filteredPeople?
-
 
 
 // alerts a list of people
-function displayPeople(people){
+function 
+ople){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
