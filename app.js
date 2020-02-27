@@ -8,7 +8,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      searchByName(people);
+      // TODO: search by name
       break;
     case 'no':
       // TODO: search by traits
@@ -58,7 +58,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
 
   let filteredPeople = people.filter(function(el) {
-    if(el.firstName === firstName && el.lastName === lastName) {
+    if(el.firstName.toLowerCase === firstName && el.lastName.toLowerCase === lastName) {
       return el;
     }
   });
@@ -76,7 +76,7 @@ function searchByGender(people){
 }
 
 //Needed ability to search by DOB
-function searchByGender(people){
+function searchByDOB(people){
   var dob = promptFor("What is the person's date of birth?", chars);
 
   let filteredPeople = people.filter(function(el) {
@@ -135,7 +135,7 @@ function searchByParents(people){
   var parents = promptFor("Who are the person's parents?", chars);
 
   let filteredPeople = people.filter(function(el) {
-    if(el[parents]=== parents) {
+    if(el[parents] === parents) {
       return el;
     }
   });  
