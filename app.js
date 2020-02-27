@@ -11,7 +11,7 @@ function app(people){
       // TODO: search by name
       break;
     case 'no':
-      // TODO: search by traits
+      searchByTraits();
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -19,6 +19,7 @@ function app(people){
     break;
   }
 }
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -52,7 +53,30 @@ function mainMenu(person, people){
   }
 }
 
+
+function searchByTraits(){
+  var userInputeNumberOfTraits = promptFor("How many traits would you like to compare?", chars)
+
+  switch(userInputeNumberOfTraits){
+    case "1":
+    case "one":
+      let intOfTraits = 1;
+      pickTheTraits(intOfTraits);
+    break;
+
+  }
+}
+
+function pickTheTraits(intOfTraits){
+  for ( i = 0; i < intOfTraits; i++ ){
+    var listoftraits = promptFor("Which Trait(s) would you like to filter by? Options: Gender, Date of Birth, Height, Weight, eyeColor, Occupation, Parents, Current Spouse", chars);
+  }
+  
+}
+
+
 //Needed ability to search by name & last name
+
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -60,6 +84,10 @@ function searchByName(people){
   let filteredPeople = people.filter(function(el) {
     if(el.firstName.toLowerCase === firstName && el.lastName.toLowerCase === lastName) {
       return el;
+    }
+    else{
+        alert("Could not find that individual.");
+        return app(people); // restart
     }
   });
 }
