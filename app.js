@@ -53,6 +53,7 @@ function mainMenu(person, people){
   }
 }
 
+
 function searchByTraits(){
   var userInputeNumberOfTraits = promptFor("How many traits would you like to compare?", chars)
 
@@ -73,6 +74,9 @@ function pickTheTraits(intOfTraits){
   
 }
 
+
+//Needed ability to search by name & last name
+
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -86,10 +90,99 @@ function searchByName(people){
         return app(people); // restart
     }
   });
+}
+
+//Needed ability to search by gender
+function searchByGender(people){
+  var gender = promptFor("what is the person's gender?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.gender === gender) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by DOB
+function searchByGender(people){
+  var dob = promptFor("What is the person's date of birth?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.dob === dob) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by height
+function searchByHeight(people){
+  var height = promptFor("What is the person's height?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.height === height) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by weight
+function searchByWeight(people){
+  var weight = promptFor("What is the person's weight?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.weight === weight) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by eye color
+function searchByEyeColor(people){
+  var eyeColor = promptFor("What is the person's eye color?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.eyeColor === eyeColor) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by occupation
+function searchByOccupation(people){
+  var occupation = promptFor("What is the person's occupation?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.occupation === occupation) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by parents
+function searchByParents(people){
+  var parents = promptFor("Who are the person's parents?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el[parents]=== parents) {
+      return el;
+    }
+  });  
+}
+
+//Needed ability to search by current spouse
+function searchByCurrentSpouse(people){
+  var currentSpouse = promptFor("Who is the person's current spouse?", chars);
+
+  let filteredPeople = people.filter(function(el) {
+    if(el.currentSpouse === currentSpouse) {
+      return el;
+    }
+  });  
+}
 
   // TODO: What to do with filteredPeople?
 
-}
+
 
 // alerts a list of people
 function displayPeople(people){
