@@ -8,7 +8,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-     searchByName(people);
+     searchByName(people);  
       break;
     case 'no':
       searchByTraits();
@@ -100,7 +100,11 @@ function searchByGender(people){
     if(el.gender === gender) {
       return el;
     }
-  }); 
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
+  });  
 }
 
 //Needed ability to search by DOB
@@ -111,6 +115,10 @@ function searchByDOB(people){
     if(el.dob === dob) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -122,6 +130,10 @@ function searchByHeight(people){
     if(el.height === height) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -133,6 +145,10 @@ function searchByWeight(people){
     if(el.weight === weight) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -144,6 +160,10 @@ function searchByEyeColor(people){
     if(el.eyeColor === eyeColor) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -155,6 +175,10 @@ function searchByOccupation(people){
     if(el.occupation === occupation) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -166,6 +190,10 @@ function searchByParents(people){
     if(el[parents] === parents) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
@@ -177,6 +205,10 @@ function searchByCurrentSpouse(people){
     if(el.currentSpouse === currentSpouse) {
       return el;
     }
+    else{
+      alert("Could not find that individual.");
+      return app(people); // restart
+  }
   });  
 }
 
