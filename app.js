@@ -11,7 +11,7 @@ function app(people){
      searchByName(people);  
       break;
     case 'no':
-      searchByTraits();
+      searchByTraits(people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -54,7 +54,7 @@ function mainMenu(person, people){
 }
 
 
-function searchByTraits(){
+function searchByTraits(people){
   var userInputeNumberOfTraits = promptFor("How many traits would you like to compare?", chars)
 
   switch(userInputeNumberOfTraits){
@@ -67,27 +67,15 @@ function searchByTraits(){
   }
 }
 
-function pickTheTraits(intOfTraits){
-  for ( i = 0; i < intOfTraits; i++ ){
-    var listoftraits = promptFor("Which Trait(s) would you like to filter by? Options: Gender, Date of Birth, Height, Weight, eyeColor, Occupation, Parents, Current Spouse", chars);
-  }
-  
-}
-
-
 //Needed ability to search by name & last name
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-  people.filter(function(el) {
+    people.filter(function(el) {
     if(el.firstName === firstName && el.lastName === lastName) {
       mainMenu(el, people);
-    }
-    else{
-        alert("Could not find that individual.");
-        return app(people); // restart
     }
   });  
 }
@@ -100,10 +88,6 @@ function searchByGender(people){
     if(el.gender === gender) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -115,10 +99,6 @@ function searchByDOB(people){
     if(el.dob === dob) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -130,10 +110,6 @@ function searchByHeight(people){
     if(el.height === height) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -145,10 +121,6 @@ function searchByWeight(people){
     if(el.weight === weight) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -160,10 +132,6 @@ function searchByEyeColor(people){
     if(el.eyeColor === eyeColor) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -175,10 +143,6 @@ function searchByOccupation(people){
     if(el.occupation === occupation) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -190,10 +154,6 @@ function searchByParents(people){
     if(el[parents] === parents) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
@@ -205,10 +165,6 @@ function searchByCurrentSpouse(people){
     if(el.currentSpouse === currentSpouse) {
       return el;
     }
-    else{
-      alert("Could not find that individual.");
-      return app(people); // restart
-  }
   });  
 }
 
