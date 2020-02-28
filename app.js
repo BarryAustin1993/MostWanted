@@ -11,7 +11,7 @@ function app(people){
      searchByName(people);  
       break;
     case 'no':
-      searchByTraits(people);
+      startSearchLoop(people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -71,30 +71,53 @@ function searchByName(people){
 
 //Needed ability to loop searches to narrow down people
 function startSearchLoop(people){
-  
-
+  while(keepsearching = true){
+  var trait = promptFor("What is a known trait to narrow the search? 'gender', 'dob', 'height','weight', 'eyeColor', 'occupation'", chars);
+  var value = promptFor("What is the value of the known trait? example: if height = '71', eyeColor = 'brown'", chars);
+  var filteredPeople = searchByTrait(people, trait, value);
+  continueSearchLoop(filteredPeople);
   }
+
 }
 
 //Needed ability to search by trait
-function searchByTrait(people,trait,value){
-  var gender = promptFor("what is the person's gender?", chars);
+function searchByTrait(people, trait, value){
 
   let filteredPeople = people.filter(function(el) {
     if(el[trait] === value) {
       return el;
     }
+
+    if (filteredPeople.length === 1){
+    let person = filteredPeople[0];
+    return person;
+    }
+    else{
+    return filteredPeople;
+    }
   });  
 }
 
-function continueSearchLoop(){
+function continueSearchLoop(filteredPeople){
+displayPeople(filteredPeople);
+var searchType = promptFor("Did you find who you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+     searchByName(people);  
+      break;
+    case 'no':
+      startSearchLoop(people);
+      break;
+    default:
+      alert("Invalid input. Please try again!");
+    break;
+  }
 
 }
 
 
-// alerts a list of people
-function 
-ople){
+// alerts a list of people 
+function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
