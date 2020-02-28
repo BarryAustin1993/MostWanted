@@ -159,8 +159,8 @@ function chars(input){
 }
 
 function searchFamily(people, person){
-  var family = searchByTrait(people, "id", person[parents[0]]);
-  var family =+ searchByTrait(people, "id", person[parents[1]]);
+  var family = searchByTrait(people, "id", person.parents[0]);
+  
   displayPeople(family);
 }
 
