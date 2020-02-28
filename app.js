@@ -35,14 +35,13 @@ function mainMenu(people, person){
 
   switch(displayOption){
     case "info":
-      displayPerson(person);
+      displayPerson(people, person);
       break;
     case "family":
       searchFamily(people, person);
       break;
     case "descendants":
-      let descendants = getDescendants(people, person);
-      displayPeople(descendants);
+      getDescendants(people, person);
       break;
     case "restart":
       app(people); // restart
@@ -50,7 +49,7 @@ function mainMenu(people, person){
     case "quit":
       return; // stop execution
     default:
-      return mainMenu(person, people); // ask again
+      return mainMenu(people, person); // ask again
   }
 }
 
@@ -90,7 +89,9 @@ function search(people, filteredPeople){
 //Needed ability to search by trait
 function searchByTrait(people, trait, value){
 
+
   var filteredPeople = people.filter(function(el) {
+    
     if(el[trait] == value) {
       return el;
   }
@@ -126,7 +127,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(people, person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
@@ -139,6 +140,7 @@ function displayPerson(person){
   personInfo += "Former Occupation: " + person.occupation;
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+  mainMenu(people, person);
 }
 
 // function that prompts and validates user input
@@ -158,25 +160,72 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-
-
 function searchFamily(people, person){
-  var family = searchByTrait(people, "id", person.parents[0]);
+  searchSpouse(people, person);
+  getChildren(people, person);
+  searchParents(people, person);
+  if (parents !== undefined){
+    searchSiblings(people, person, parents)
+  }
   
-  displayPeople(family);
+  mainMenu(people, person);
 }
+function searchSpouse(people, person){
+  var spouse = searchByTrait(people, "id", person.currentSpouse);
+  if(spouse !== undefined){
+    alert("Spouse: \n" + spouse[0].firstName + " " + spouse[0].lastName)
+  }
+  else{
+    alert("There is no spouse!")
+  }
+}
+function searchParents(people, person){
+  var parents = people.filter(function(el) {
+    if(person.parents[0] === el.id || person.parents[1] === el.id){
+      return true;
+    }
+          else{
+      return false;
+    }
+  });
+  if(parents !== undefined){
+  alert("The parents are: " +
+    parents.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));}
+  else{
+    alert("This is Batman!")
+  }
+}
+function searchSiblings(people, person, parents){
+  for( i =0; i < parents.length; i ++){
+    var allChildren = getChildren(people, parents[i])
+  }
+  var siblings = removeSelf(person, allChildren)
 
-
+  if(siblings !== undefined){
+  alert("The siblings are: " +
+  siblings.map(function(person){
+  return person.firstName + " " + person.lastName;
+}).join("\n"));
+}
+else{
+  alert("This person is an only child!")
+}
+}
+function removeSelf(person, allChildren ){
+var siblings = allChildren.filter(function(el){
+  if(el.id !== person.id){
+    return el;
+  }
+});
+return siblings;
+}
  function getDescendants(people, person){
-  var decendants = getChildren(people, person);
-  decendants = getGrandChildren(people, decendants);
-
-
-  return decendants;
- }
-
-
-
+  getChildren(people, person);
+  getGrandChildren(people, decendants);
+  mainMenu(people, person)
+}
 function getChildren(people, person) {
   var decendants = people.filter(function(el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
@@ -186,16 +235,31 @@ function getChildren(people, person) {
       return false;
     }
   });
-return decendants;
+
+  if(decendants !== undefined){
+    alert("The children are: " +
+    decendants.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+  }
+  else{
+    alert("This person has no children!")
+  }
+
 }
-
 function getGrandChildren(people, decendants){
-
   for(let i = 0; i < decendants.length; i++){
     var futureDescendants = (getChildren(people, decendants[i]));
   }
   let combineddecendants = futureDescendants.concat(decendants)
-return combineddecendants;
 
-
+  if(combineddecendants !== undefined){
+    alert("The future generations are: " +
+    combineddecendants.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+  }
+  else{
+    alert("This person has no further decendants")
+  }
 }
