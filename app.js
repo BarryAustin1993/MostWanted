@@ -41,7 +41,7 @@ function mainMenu(people, person){
       searchFamily(people, person);
       break;
     case "descendants":
-      getDescendants(people, person)
+      getDescendants()
       break;
     case "restart":
       app(people); // restart
@@ -158,29 +158,22 @@ function chars(input){
   return true; // default validation only
 }
 
-
 function searchFamily(people, person){
   var family = searchByTrait(people, "id", person.parents[0]);
   
   displayPeople(family);
 }
 
-function getDescendants(people, person) {
-  let filteredPeople = people.filter(function(el) {
+function searchDescendants(person = undefined, people){
+  let filteredPeople = people.reduce(function(total = undefined, el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
-      return true;
-    }      else{
-      return false;
+      return total + el;
     }
-  });
+    else{
+    }     
+  })
+ return searchDescendants(filteredPeople)
 
-  for(let i = 0; i < filteredPeople.Length; i++){
-    filteredPeople.concat(getDescendants(people, filteredPeople[i]));
-  }
-
-  return filteredPeople;
-  
-
- //return getDescendants(people, filteredPeople[personIndex], filteredPeople)
+ 
 }
 
