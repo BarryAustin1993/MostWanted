@@ -62,7 +62,7 @@ function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-    people.filter(function(el) {
+  people.filter(function(el) {
     if(el.firstName === firstName && el.lastName === lastName) {
       mainMenu(el, people);
     }
@@ -105,6 +105,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + " inches." + "\n";
+  personInfo += "Weight: " + person.weight + " lbs." + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Former Occupation: " + person.occupation;
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
