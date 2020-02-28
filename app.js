@@ -41,7 +41,12 @@ function mainMenu(people, person){
       searchFamily(people, person);
       break;
     case "descendants":
+<<<<<<< HEAD
       getDescendants()
+=======
+      let descendants = getDescendants(people, person);
+      displayPeople(descendants);
+>>>>>>> 26e169f31e09dee1aca10557a2f25559dc399c35
       break;
     case "restart":
       app(people); // restart
@@ -163,17 +168,36 @@ function searchFamily(people, person){
   
   displayPeople(family);
 }
+ function getDescendants(people, person){
+  var decendants = getChildren(people, person);
+  decendants += getGrandChildren(people, decendants);
 
-function searchDescendants(person = undefined, people){
-  let filteredPeople = people.reduce(function(total = undefined, el) {
+
+  return decendants;
+ }
+
+
+
+function getChildren(people, person) {
+  var decendants = people.filter(function(el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
-      return total + el;
+      return true;
     }
-    else{
-    }     
-  })
- return searchDescendants(filteredPeople)
-
- 
+          else{
+      return false;
+    }
+  });
+return decendants;
 }
 
+function getGrandChildren(people, decendants){
+
+  for(let i = 0; i < decendants.length; i++){
+    var futureDescendants = (getChildren(people, decendants[i]));
+  }
+  let combineddecendants = futureDescendants.concat(decendants)
+return combineddecendants;
+
+>>>>>>> 26e169f31e09dee1aca10557a2f25559dc399c35
+
+}
