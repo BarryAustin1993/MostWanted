@@ -41,7 +41,8 @@ function mainMenu(people, person){
       searchFamily(people, person);
       break;
     case "descendants":
-      getDescendants(people, person)
+      let descendants = getDescendants(people, person);
+      displayPeople(descendants);
       break;
     case "restart":
       app(people); // restart
@@ -165,22 +166,36 @@ function searchFamily(people, person){
   displayPeople(family);
 }
 
-function getDescendants(people, person) {
-  let filteredPeople = people.filter(function(el) {
+
+ function getDescendants(people, person){
+  var decendants = getChildren(people, person);
+  decendants += getGrandChildren(people, decendants);
+
+
+  return decendants;
+ }
+
+
+
+function getChildren(people, person) {
+  var decendants = people.filter(function(el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
       return true;
-    }      else{
+    }
+          else{
       return false;
     }
   });
-
-  for(let i = 0; i < filteredPeople.Length; i++){
-    filteredPeople.concat(getDescendants(people, filteredPeople[i]));
-  }
-
-  return filteredPeople;
-  
-
- //return getDescendants(people, filteredPeople[personIndex], filteredPeople)
+return decendants;
 }
 
+function getGrandChildren(people, decendants){
+
+  for(let i = 0; i < decendants.length; i++){
+    var futureDescendants = (getChildren(people, decendants[i]));
+  }
+  let combineddecendants = futureDescendants.concat(decendants)
+return combineddecendants;
+
+
+}
