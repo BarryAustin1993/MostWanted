@@ -163,3 +163,15 @@ function searchFamily(people, person){
   var family =+ searchByTrait(people, "id", person[parents[1]]);
   displayPeople(family);
 }
+
+function searchDescendants(person = undefined, people){
+  let filteredPeople = people.reduce(function(total = undefined, el) {
+    if(el.parents[0] === person.id || el.parents[1] === person.id){
+      return total + el;
+    }
+    else{
+    }     
+  })
+ return searchDescendants(filteredPeople)
+}
+
