@@ -41,7 +41,7 @@ function mainMenu(people, person){
       // TODO: get person's family
       break;
     case "descendants":
-      getDescendants()
+      getDescendants(people, person)
       break;
     case "restart":
       app(people); // restart
@@ -151,13 +151,24 @@ function chars(input){
   return true; // default validation only
 }
 
-function searchDescendants(person = undefined, people){
-  let filteredPeople = people.reduce(function(total = undefined, el) {
+//Needed a function to be able to track down a persons descendants
+//[persno, person , person ]
+function getDescendants(people, person) {
+  let filteredPeople = people.filter(function(el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
-      return total + el;
+      return true;
+    }      else{
+      return false;
     }
-    else{
-    }     
-  })
- return searchDescendants(filteredPeople)
+  });
+
+  for(let i = 0; i < filteredPeople.Length; i++){
+    filteredPeople.concat(getDescendants(people, filteredPeople[i]));
+  }
+
+  return filteredPeople;
+  
+
+ //return getDescendants(people, filteredPeople[personIndex], filteredPeople)
 }
+
