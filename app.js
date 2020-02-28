@@ -169,7 +169,7 @@ function searchFamily(people, person){
 
  function getDescendants(people, person){
   var decendants = getChildren(people, person);
-  decendants += getGrandChildren(people, decendants);
+  decendants = getGrandChildren(people, decendants);
 
 
   return decendants;
