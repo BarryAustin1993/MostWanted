@@ -38,7 +38,7 @@ function mainMenu(people, person){
       displayPerson(person);
       break;
     case "family":
-      searchFamily(person, people);
+      searchFamily(people, person);
       break;
     case "descendants":
       getDescendants()
