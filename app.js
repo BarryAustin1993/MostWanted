@@ -77,11 +77,11 @@ function startSearchLoop(people){
 }
 
 //Needed ability to search by trait
-function searchByTrait(people,trait){
+function searchByTrait(people,trait,value){
   var gender = promptFor("what is the person's gender?", chars);
 
   let filteredPeople = people.filter(function(el) {
-    if(el.trait === trait) {
+    if(el[trait] === value) {
       return el;
     }
   });  
