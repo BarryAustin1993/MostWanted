@@ -150,3 +150,14 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function searchDescendants(person = undefined, people){
+  let filteredPeople = people.reduce(function(total = undefined, el) {
+    if(el.parents[0] === person.id || el.parents[1] === person.id){
+      return total + el;
+    }
+    else{
+    }     
+  })
+ return searchDescendants(filteredPeople)
+}
