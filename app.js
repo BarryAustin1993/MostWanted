@@ -11,7 +11,7 @@ function app(people){
      searchByName(people);  
       break;
     case 'no':
-      startSearchRecursion(people);
+      search(people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -22,7 +22,7 @@ function app(people){
 
 
 // Menu function to call once you find who you are looking for
-function mainMenu(person, people){
+function mainMenu(people, person){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
@@ -41,7 +41,7 @@ function mainMenu(person, people){
       // TODO: get person's family
       break;
     case "descendants":
-      // TODO: get person's descendants
+      getDescendants()
       break;
     case "restart":
       app(people); // restart
@@ -53,29 +53,30 @@ function mainMenu(person, people){
   }
 }
 
-
-
-
 //Needed ability to search by name & last name
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-  people.filter(function(el) {
+    people.filter(function(el) {
     if(el.firstName === firstName && el.lastName === lastName) {
-      mainMenu(el, people);
+      mainMenu(people, el)
     }
-  });  
+  });
 }
 
-//Needed ability to loop searches to narrow down people
-function startSearchRecursion(people){
-
+function search(people, filteredPeople){
   var trait = promptFor("What is a known trait to narrow the search? 'gender', 'dob', 'height','weight', 'eyeColor', 'occupation'", chars);
   var value = promptFor("What is the value of the known trait? example: if height = '71', eyeColor = 'brown'", chars);
-  var filteredPeople = searchByTrait(people, trait, value);
-  continueSearchLoop(filteredPeople);
+  if(filteredPeople !== undefined){
+    var filteredPeople = searchByTrait(filteredPeople, trait, value);
+  }
+  else{
+    var filteredPeople = searchByTrait(people, trait, value);
+  }
+
+  continueSearchLoop(people, filteredPeople);
 }
 
 //Needed ability to search by trait
@@ -86,8 +87,6 @@ function searchByTrait(people, trait, value){
       return el;
   }
 });  
-
-
     if (filteredPeople.Length === 1){
     let person = filteredPeople[0];
     return person;
@@ -97,15 +96,16 @@ function searchByTrait(people, trait, value){
     }
 };
 
-function continueSearchLoop(filteredPeople){
+function continueSearchLoop(people, filteredPeople){
 displayPeople(filteredPeople);
 var searchType = promptFor("Did you find who you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      searchByName(filteredPeople);
+      searchByName(people);
       break;
+     
     case 'no':
-      startSearchRecursion(filteredPeople);
+      search(people, filteredPeople);
       break;
   }
 }
