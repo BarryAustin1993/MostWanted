@@ -35,7 +35,7 @@ function mainMenu(people, person){
 
   switch(displayOption){
     case "info":
-      displayPerson(person);
+      displayPerson(people, person);
       break;
     case "family":
       searchFamily(people, person);
@@ -127,7 +127,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(people, person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
@@ -140,6 +140,7 @@ function displayPerson(person){
   personInfo += "Former Occupation: " + person.occupation;
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+  mainMenu(people, person);
 }
 
 // function that prompts and validates user input
