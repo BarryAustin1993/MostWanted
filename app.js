@@ -11,7 +11,7 @@ function app(people){
      searchByName(people);  
       break;
     case 'no':
-      startSearchLoop(people);
+      startSearchRecursion(people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -70,49 +70,44 @@ function searchByName(people){
 }
 
 //Needed ability to loop searches to narrow down people
-function startSearchLoop(people){
-  while(keepsearching = true){
+function startSearchRecursion(people){
+
   var trait = promptFor("What is a known trait to narrow the search? 'gender', 'dob', 'height','weight', 'eyeColor', 'occupation'", chars);
   var value = promptFor("What is the value of the known trait? example: if height = '71', eyeColor = 'brown'", chars);
   var filteredPeople = searchByTrait(people, trait, value);
   continueSearchLoop(filteredPeople);
-  }
-
 }
 
 //Needed ability to search by trait
 function searchByTrait(people, trait, value){
 
-  let filteredPeople = people.filter(function(el) {
-    if(el[trait] === value) {
+  var filteredPeople = people.filter(function(el) {
+    if(el[trait] == value) {
       return el;
-    }
+  }
+});  
 
-    if (filteredPeople.length === 1){
+
+    if (filteredPeople.Length === 1){
     let person = filteredPeople[0];
     return person;
     }
     else{
     return filteredPeople;
     }
-  });  
-}
+};
 
 function continueSearchLoop(filteredPeople){
 displayPeople(filteredPeople);
 var searchType = promptFor("Did you find who you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-     searchByName(people);  
+      searchByName(filteredPeople);
       break;
     case 'no':
-      startSearchLoop(people);
+      startSearchRecursion(filteredPeople);
       break;
-    default:
-      alert("Invalid input. Please try again!");
-    break;
   }
-
 }
 
 
