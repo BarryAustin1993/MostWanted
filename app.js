@@ -38,7 +38,7 @@ function mainMenu(people, person){
       displayPerson(person);
       break;
     case "family":
-      // TODO: get person's family
+      searchFamily(people, person);
       break;
     case "descendants":
       getDescendants(people, person)
@@ -59,11 +59,18 @@ function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-    people.filter(function(el) {
+    let filteredpeople = people.filter(function(el) {
     if(el.firstName === firstName && el.lastName === lastName) {
-      mainMenu(people, el)
+      return el;
     }
   });
+  if (filteredpeople.length === 1){
+    var person = filteredpeople[0];
+    mainMenu(people, person);
+  }
+  else{
+    mainMenu(people, filteredpeople);
+  }
 }
 
 function search(people, filteredPeople){
@@ -151,8 +158,13 @@ function chars(input){
   return true; // default validation only
 }
 
-//Needed a function to be able to track down a persons descendants
-//[persno, person , person ]
+
+function searchFamily(people, person){
+  var family = searchByTrait(people, "id", person[parents[0]]);
+  var family =+ searchByTrait(people, "id", person[parents[1]]);
+  displayPeople(family);
+}
+
 function getDescendants(people, person) {
   let filteredPeople = people.filter(function(el) {
     if(el.parents[0] === person.id || el.parents[1] === person.id){
